@@ -19,6 +19,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const renderSections = jobDesc => {
+  return jobDesc.map(item => {
+    return (
+      <div>
+        <li>{item}</li>
+      </div>
+    );
+  });
+};
+
 const Sections = () => {
   const classes = useStyles();
 
@@ -35,23 +45,8 @@ const Sections = () => {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>{Experience.positions[0].responsibilities[0]}</Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>
-            Relevant Experience
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            {renderSections(Experience.positions[0].responsibilities)}
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
