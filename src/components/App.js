@@ -18,9 +18,7 @@ const App = () => {
   return (
     <div className={classes.thing}>
       <Header />
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
+
       <Sections />
     </div>
   );

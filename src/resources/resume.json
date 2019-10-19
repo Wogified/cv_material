@@ -1,0 +1,32 @@
+{
+  "Experience": {
+    "header": "Experience",
+    "positions": [
+      {
+        "institution": "Meso Scale Discovery",
+        "role": "Automation Engineer",
+        "location": "Rockville, MD",
+        "start_date": "May 2017",
+        "end_date": null,
+        "responsibilities": [
+          "Developed Python application to go through a repository of product inspection images, sort by disposition, rename the files, and output them into a separate folder for manual inspection.",
+          "Developed automated subroutines to generate robot position coordinates to reduce the number of robot positions that need to be manually taught.",
+          "Developed a code structure for robot motion control. As a result, the robot code was more adaptable, debug friendly, and easier to read",
+          "Led efforts to investigate PLC scripting capability. The purpose was to explore means to further improve and condense existing codebase.",
+          "Learned how to use industrial computer vision software to optimize and improve existing methods of finished product quality inspection."
+        ]
+      },
+      {
+        "institution": "UMBC Autonomous Systems Research Lab",
+        "role": "Graduate Research Assistant",
+        "location": "Baltimore, MD",
+        "start_date": "May 2015",
+        "end_date": "May 2017",
+        "responsibilities": [
+          "Led a project to develop a computer vision based teleoperation robot arm",
+          "Developed application to utilize depth sensing and skeleton tracking capabilities of Microsoft Kinect V2 to tele-operate a robotic arm"
+        ]
+      }
+    ]
+  }
+}
