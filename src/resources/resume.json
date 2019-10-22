@@ -28,5 +28,56 @@
         ]
       }
     ]
+  },
+  "skills": {
+    "header": "Skills",
+    "OS": ["Windows 7", "Windows 10", "Linux Ubuntu", "Unix"],
+    "ProgLang": ["MatLab", "Arduino", "Python", "Javascript", "SQL"],
+    "Frameworks": ["React", "Pandas", "NumPy", "matplotlib"],
+    "Software": [
+      "MatLab",
+      "Solidworks",
+      "Microsoft Office",
+      "Visual Studio",
+      "Git",
+      "OpenCV",
+      "RSlogix 5000"
+    ],
+    "Hardware": [
+      "Raspberry Pi",
+      "Arduino",
+      "3D printers",
+      "Laser Cutters",
+      "Allen-Bradley PLC",
+      "Cognex"
+    ]
+  },
+  "proj": {
+    "header": "Projects",
+    "portfolio": {
+      "desc": "Open CV Color Tracking Robot",
+      "role": "CAD and Control Systems Engineer",
+      "github": null,
+      "youtube": null,
+      "responsibilities": [
+        "Designed and manufactured a pan and tilt camera gimbal capable of tracking and following a user specified color.",
+        "Applied PID control algorithm and OpenCV Color tracking"
+      ]
+    }
+  },
+  "school": {
+    "header": "Education",
+    "degrees": [
+      {
+        "place": "University of Maryland, Baltimore County",
+        "degree": "M.S. in Mechanical Engineering, Control Systems",
+        "gpa": 3.83
+      },
+      {
+        "place": "University of Maryland, Baltimore County",
+        "degree": "B.S. in Mechanical Engineering, Control Systems",
+        "gpa": 3.81
+      }
+    ]
   }
 }
