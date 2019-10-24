@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Button, Container } from "@material-ui/core";
 
 import Header from "./Header";
 import Sections from "./Sections";
@@ -18,8 +17,9 @@ const App = () => {
   return (
     <div className={classes.thing}>
       <Header />
-
-      <Sections />
+      <Container>
+        <Sections />
+      </Container>      
     </div>
   );
 };
