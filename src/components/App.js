@@ -4,13 +4,13 @@ import { makeStyles, Button, Container } from "@material-ui/core";
 import Header from "./Header";
 import Sections from "./Sections";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   thing: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   }
-});
+}));
 
 const App = () => {
   const classes = useStyles();
@@ -19,7 +19,7 @@ const App = () => {
       <Header />
       <Container>
         <Sections />
-      </Container>      
+      </Container>
     </div>
   );
 };

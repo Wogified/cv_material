@@ -1,5 +1,6 @@
 import React from "react";
 import Education from './resume/Education';
+import Experience from './resume/Experience';
 
 const renderSections = jobDesc => {
   return jobDesc.map(item => {
@@ -15,9 +16,9 @@ const Sections = () => {
   return (
     <div>
       <Education />
-      {/* <Experience />
-      <Projects />
-      <Skills /> */}
+      <Experience />
+      {/* <Projects /> */}
+      {/* <Skills /> */}
     </div>
   );
 };
