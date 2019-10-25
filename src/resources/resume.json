@@ -31,9 +31,25 @@
   },
   "skills": {
     "header": "Skills",
-    "OS": ["Windows 7", "Windows 10", "Linux Ubuntu", "Unix"],
-    "ProgLang": ["MatLab", "Arduino", "Python", "Javascript", "SQL"],
-    "Frameworks": ["React", "Pandas", "NumPy", "matplotlib"],
+    "OS": [
+      "Windows 7",
+      "Windows 10",
+      "Linux Ubuntu",
+      "Unix"
+    ],
+    "ProgLang": [
+      "MatLab",
+      "Arduino",
+      "Python",
+      "Javascript",
+      "SQL"
+    ],
+    "Frameworks": [
+      "React",
+      "Pandas",
+      "NumPy",
+      "matplotlib"
+    ],
     "Software": [
       "MatLab",
       "Solidworks",
@@ -71,12 +87,14 @@
       {
         "place": "University of Maryland, Baltimore County",
         "degree": "M.S. in Mechanical Engineering, Control Systems",
-        "gpa": 3.83
+        "gpa": 3.83,
+        "finish_date": "May 2017"
       },
       {
         "place": "University of Maryland, Baltimore County",
-        "degree": "B.S. in Mechanical Engineering, Control Systems",
-        "gpa": 3.81
+        "degree": "B.S. in Mechanical Engineering",
+        "gpa": 3.81,
+        "finish_date": "May 2015"
       }
     ]
   }
