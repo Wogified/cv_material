@@ -88,37 +88,7 @@ const renderSections = projs => {
     });
 };
 
-const renderGit = (links) => {
-    const classes = myStyles();
-    if (links.length != 0) {
-        return links.map(link => {
-            return (
-                <Grid item xs={12} className={classes.deg}>
-                    {link.desc}: {link.url}
-                </Grid>
-            );
-        });
-    }
-
-}
-
-const renderDuties = duties => {
-    return duties.map(duty => {
-        return (
-            <div>
-                <Divider />
-                <ListItem >
-                    <ListItemText primary={duty} />
-                </ListItem>
-
-            </div>
-        );
-    });
-}
-
-
-
-const Projects = () => {
+const Projects = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>

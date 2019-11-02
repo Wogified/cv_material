@@ -31,55 +31,90 @@
   },
   "skills": {
     "header": "Skills",
-    "OS": [
-      "Windows 7",
-      "Windows 10",
-      "Linux Ubuntu",
-      "Unix"
-    ],
-    "ProgLang": [
-      "MatLab",
-      "Arduino",
-      "Python",
-      "Javascript",
-      "SQL"
-    ],
-    "Frameworks": [
-      "React",
-      "Pandas",
-      "NumPy",
-      "matplotlib"
-    ],
-    "Software": [
-      "MatLab",
-      "Solidworks",
-      "Microsoft Office",
-      "Visual Studio",
-      "Git",
-      "OpenCV",
-      "RSlogix 5000"
-    ],
-    "Hardware": [
-      "Raspberry Pi",
-      "Arduino",
-      "3D printers",
-      "Laser Cutters",
-      "Allen-Bradley PLC",
-      "Cognex"
+    "detail": [
+      {
+        "desc": "OS",
+        "list": [
+          "Windows 7",
+          "Windows 10",
+          "Linux Ubuntu",
+          "Unix"
+        ]
+      },
+      {
+        "desc": "Programming Languages",
+        "list": [
+          "MatLab",
+          "Arduino",
+          "Python",
+          "Javascript",
+          "SQL"
+        ]
+      },
+      {
+        "desc": "Frameworks",
+        "list": [
+          "React",
+          "Pandas",
+          "NumPy",
+          "matplotlib"
+        ]
+      },
+      {
+        "desc": "Software",
+        "list": [
+          "MatLab",
+          "Solidworks",
+          "Microsoft Office",
+          "Visual Studio",
+          "Git",
+          "OpenCV",
+          "RSlogix 5000"
+        ]
+      },
+      {
+        "desc": "Software",
+        "list": [
+          "Raspberry Pi",
+          "Arduino",
+          "3D printers",
+          "Laser Cutters",
+          "Allen-Bradley PLC",
+          "Cognex"
+        ]
+      }
     ]
   },
   "proj": {
     "header": "Projects",
-    "portfolio": {
-      "desc": "Open CV Color Tracking Robot",
-      "role": "CAD and Control Systems Engineer",
-      "github": null,
-      "youtube": null,
-      "responsibilities": [
-        "Designed and manufactured a pan and tilt camera gimbal capable of tracking and following a user specified color.",
-        "Applied PID control algorithm and OpenCV Color tracking"
-      ]
-    }
+    "portfolio": [
+      {
+        "desc": "Open CV Color Tracking Robot",
+        "role": "CAD and Control Systems Engineer",
+        "links": [
+          {
+            "desc": "GitHub",
+            "url": null
+          },
+          {
+            "desc": "Youtube",
+            "url": null
+          }
+        ],
+        "responsibilities": [
+          "Designed and manufactured a pan and tilt camera gimbal capable of tracking and following a user specified color.",
+          "Applied PID control algorithm and OpenCV Color tracking"
+        ]
+      },
+      {
+        "desc": "tbd",
+        "role": "blah",
+        "links": [],
+        "responsibilities": [
+          "nothing"
+        ]
+      }
+    ]
   },
   "school": {
     "header": "Education",
