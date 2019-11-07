@@ -34,31 +34,15 @@
     "detail": [
       {
         "desc": "OS",
-        "list": [
-          "Windows 7",
-          "Windows 10",
-          "Linux Ubuntu",
-          "Unix"
-        ]
+        "list": ["Windows 7", "Windows 10", "Linux Ubuntu", "Unix"]
       },
       {
         "desc": "Programming Languages",
-        "list": [
-          "MatLab",
-          "Arduino",
-          "Python",
-          "Javascript",
-          "SQL"
-        ]
+        "list": ["MatLab", "Arduino", "Python", "Javascript", "SQL"]
       },
       {
         "desc": "Frameworks",
-        "list": [
-          "React",
-          "Pandas",
-          "NumPy",
-          "matplotlib"
-        ]
+        "list": ["React", "Pandas", "NumPy", "matplotlib"]
       },
       {
         "desc": "Software",
@@ -73,7 +57,7 @@
         ]
       },
       {
-        "desc": "Software",
+        "desc": "Hardware",
         "list": [
           "Raspberry Pi",
           "Arduino",
@@ -110,9 +94,7 @@
         "desc": "tbd",
         "role": "blah",
         "links": [],
-        "responsibilities": [
-          "nothing"
-        ]
+        "responsibilities": ["nothing"]
       }
     ]
   },
