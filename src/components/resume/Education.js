@@ -6,13 +6,24 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
-
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
 // Resource imports
 import { school } from "../../resources/resume.json";
 
 const useStyles = makeStyles(theme => ({
   toot: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: "0px",
+    paddingTop: "0px",
+    color: theme.palette.text.primary
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -22,14 +33,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     justify: "space-between"
-  },
-  summary: {
-    overflow: "hidden",
-    "&:hover": {
-      color: "white",
-      borderRadius: "4px",
-      backgroundColor: theme.palette.primary.light
-    }
   }
 }));
 
@@ -54,12 +57,26 @@ const myStyles = makeStyles(theme => ({
   }
 }));
 
-const renderSections = degrees => {
+const renderSections = ({ degrees, props }) => {
   const classes = myStyles();
-  return degrees.map(item => {
+  const handleClick = index => {
+    this.setState({ [index]: true });
+  };
+  return degrees.map((item, index) => {
     return (
       <div className={classes.boot}>
-        <Grid container spacing={0}>
+        <List className={classes.toot}>
+          <ListItem button onClick={handleClick}>
+            <ListItemText primary={item.place} />
+            {props[index] ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={!props[index]} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {item.deg}
+            </List>
+          </Collapse>
+        </List>
+        {/* <Grid container spacing={0}>
           <Grid item xs={9} className={classes.place}>
             {item.place}
           </Grid>
@@ -72,17 +89,37 @@ const renderSections = degrees => {
           <Grid item xs={4} className={classes.gpa}>
             GPA: {item.gpa}
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
     );
   });
 };
 
-const Education = () => {
+const Education = props => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
-    <div className={classes.toot}>
-      <ExpansionPanel>
+    <List className={classes.toot}>
+      <ListItem button onClick={handleClick}>
+        <ListItemText primary={school.header} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={!open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {renderSections(school.degrees)}
+        </List>
+      </Collapse>
+    </List>
+  );
+};
+
+export default Education;
+{
+  /* <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -92,11 +129,7 @@ const Education = () => {
           <Typography className={classes.heading}>{school.header}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <Typography>{renderSections(school.degrees)}</Typography>
+          <Typography>{</Typography>
         </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
-};
-
-export default Education;
+      </ExpansionPanel> */
+}
