@@ -57,25 +57,15 @@ const myStyles = makeStyles(theme => ({
   }
 }));
 
-const renderSections = ({ degrees, props }) => {
+const renderSections = props => {
   const classes = myStyles();
   const handleClick = index => {
     this.setState({ [index]: true });
   };
-  return degrees.map((item, index) => {
+  return props.school.degrees.map((item, index) => {
     return (
       <div className={classes.boot}>
-        <List className={classes.toot}>
-          <ListItem button onClick={handleClick}>
-            <ListItemText primary={item.place} />
-            {props[index] ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={!props[index]} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {item.deg}
-            </List>
-          </Collapse>
-        </List>
+        <List className={classes.toot}></List>
         {/* <Grid container spacing={0}>
           <Grid item xs={9} className={classes.place}>
             {item.place}
@@ -101,6 +91,9 @@ const Education = props => {
   const handleClick = () => {
     setOpen(!open);
   };
+  const handleClick2 = index => {
+    this.useState({ [index]: true });
+  };
 
   return (
     <List className={classes.toot}>
@@ -110,7 +103,25 @@ const Education = props => {
       </ListItem>
       <Collapse in={!open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {renderSections(school.degrees)}
+          {school.degrees.map((item, index) => (
+            <div key={index}>
+              <ListItem button={true} onClick={handleClick2(index)}>
+                <ListItemText
+                  primary={item.place}
+                  secondary={
+                    <p>
+                      <b>Author: </b>
+                      {item.deg}
+                    </p>
+                  }
+                />
+                {props[index] ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={props[index]} timeout="auto" unmountOnExit={true}>
+                <p>POOP</p>
+              </Collapse>
+            </div>
+          ))}
         </List>
       </Collapse>
     </List>
