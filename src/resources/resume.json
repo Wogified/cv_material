@@ -105,13 +105,15 @@
         "place": "University of Maryland, Baltimore County",
         "degree": "M.S. in Mechanical Engineering, Control Systems",
         "gpa": 3.83,
-        "finish_date": "May 2017"
+        "finish_date": "May 2017",
+        "open": false
       },
       {
         "place": "University of Maryland, Baltimore County",
         "degree": "B.S. in Mechanical Engineering",
         "gpa": 3.81,
-        "finish_date": "May 2015"
+        "finish_date": "May 2015",
+        "open": false
       }
     ]
   }
