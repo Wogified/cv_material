@@ -1,132 +1,156 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import Link from "@material-ui/core/Link";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 // Resource imports
 import { proj } from "../../resources/resume.json";
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: "0px",
+    paddingTop: "0px",
+    color: theme.palette.text.primary
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    justify: "space-between"
-  },
-  summary: {
-    overflow: "hidden",
-    "&:hover": {
-      backgroundColor: theme.palette.primary.light
-    }
-  }
-}));
-
-const myStyles = makeStyles(theme => ({
-  boot: {
+  desc: {
     flexGrow: 1,
-    padding: theme.spacing(1)
+    paddingRight: theme.spacing(3)
   },
   place: {
     textAlign: "left",
     fontWeight: "bold",
     textDecoration: "underline"
   },
-  date: {
+  loc: {
     textAlign: "right"
   },
-  deg: {
+  role: {
     textAlign: "left"
   },
-  gpa: {
+  dates: {
     textAlign: "right"
   },
-  bullet: {
-    listStylePosition: "outside"
+  iconlonks: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   }
-}));
+});
 
-const renderSections = projs => {
-  const classes = myStyles();
-  return projs.map(proj => {
-    return (
-      <div className={classes.boot}>
-        <Grid container spacing={0}>
-          <Grid item xs={12} className={classes.place}>
-            {proj.desc}
-          </Grid>
-          <Grid item xs={12} className={classes.deg}>
-            {proj.role}
-          </Grid>
-          {renderGit(proj.links)}
-          <Grid item xs={12}>
-            <List component="nav" aria-label="main mailbox folders">
-              {renderDuties(proj.responsibilities)}
-            </List>
-          </Grid>
-        </Grid>
-      </div>
-    );
-  });
-};
+class Projects extends React.Component {
+  state = {
+    expand: false,
+    proj: proj
+  };
 
-const renderGit = links => {
-  const classes = myStyles();
-  if (links.length !== 0) {
-    return links.map(link => {
+  handleClick = () => {
+    this.setState({ expand: !this.state.expand });
+  };
+  handleClick2 = e => {
+    this.setState({ [e]: !this.state[e] });
+  };
+  renderDuties = duties => {
+    const useDivider = index => {
+      if (index > 0) {
+        return <Divider />;
+      }
+    };
+    return duties.map((duty, index) => {
       return (
-        <Grid item xs={12} className={classes.deg}>
-          {link.desc}: {link.url}
-        </Grid>
+        <div>
+          {useDivider(index)}
+          <ListItem>
+            <ListItemIcon fontSize="small">
+              <FiberManualRecordIcon />
+            </ListItemIcon>
+            <ListItemText primary={duty} />
+          </ListItem>
+        </div>
+      );
+    });
+  };
+  renderLonks = links => {
+    const { classes } = this.props;
+    const linkIcon = link => {
+      if (link.desc.toLowerCase() === "github") {
+        return (
+          <a href={link.url} target="_blank">
+            <GitHubIcon />
+            Github
+          </a>
+        );
+      } else if (link.desc.toLowerCase() === "youtube") {
+        return (
+          <a href={link.url} target="_blank">
+            <YouTubeIcon />
+            Youtube
+          </a>
+        );
+      }
+    };
+    if (links.length !== 0) {
+      return links.map(link => {
+        return linkIcon(link);
+      });
+    }
+  };
+  renderSections() {
+    const { classes } = this.props;
+    return this.state.proj.portfolio.map((item, index) => {
+      return (
+        <List>
+          <ListItem button onClick={this.handleClick2.bind(this, index)}>
+            <Grid container spacing={1} className={classes.desc}>
+              <Grid item xs={12}>
+                <Typography>{item.desc}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>{item.role}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>{this.renderLonks(item.links)}</Typography>
+              </Grid>
+            </Grid>
+            {this.state[index] ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={this.state[index]} timeout="auto" unmountOnExit>
+            <Container className="iconlonks">
+              {this.renderDuties(item.responsibilities)}
+            </Container>
+          </Collapse>
+        </List>
       );
     });
   }
-};
 
-const renderDuties = duties => {
-  return duties.map(duty => {
+  render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <Divider />
-        <ListItem>
-          <ListItemText primary={duty} />
+      <List className={classes.root}>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemText primary={this.state.proj.header} />
+          {this.state.expand ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-      </div>
+        <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
+          {this.renderSections()}
+        </Collapse>
+      </List>
     );
-  });
-};
+  }
+}
 
-const Projects = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{proj.header}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <Typography>{renderSections(proj.portfolio)}</Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
-};
-
-export default Projects;
+export default withStyles(styles, { withTheme: true })(Projects);

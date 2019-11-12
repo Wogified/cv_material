@@ -75,26 +75,31 @@
       {
         "desc": "Open CV Color Tracking Robot",
         "role": "CAD and Control Systems Engineer",
-        "links": [
-          {
-            "desc": "GitHub",
-            "url": null
-          },
-          {
-            "desc": "Youtube",
-            "url": null
-          }
-        ],
+        "links": [],
         "responsibilities": [
           "Designed and manufactured a pan and tilt camera gimbal capable of tracking and following a user specified color.",
           "Applied PID control algorithm and OpenCV Color tracking"
         ]
       },
       {
-        "desc": "tbd",
-        "role": "blah",
-        "links": [],
-        "responsibilities": ["nothing"]
+        "desc": "Motorized Camera Slider",
+        "role": "Design Engineer",
+        "links": [
+          {
+            "desc": "GitHub",
+            "url": "https://github.com/Wogified/Arduino-Motorized-Camera-Slider"
+          },
+          {
+            "desc": "Youtube",
+            "url": "https://www.youtube.com/watch?v=MBSH8WzF9Ts"
+          }
+        ],
+        "responsibilities": [
+          "Created 3D design of a motorized camera slider",
+          "Sourced hardware and electrical components to fit a reasonable budget",
+          "3D printed and assembled custom designed components",
+          "Programmed User interface and motor functions"
+        ]
       }
     ]
   },
@@ -105,15 +110,15 @@
         "place": "University of Maryland, Baltimore County",
         "degree": "M.S. in Mechanical Engineering, Control Systems",
         "gpa": 3.83,
-        "finish_date": "May 2017",
-        "open": false
+        "start": "May 2015",
+        "finish": "May 2017"
       },
       {
         "place": "University of Maryland, Baltimore County",
         "degree": "B.S. in Mechanical Engineering",
         "gpa": 3.81,
-        "finish_date": "May 2015",
-        "open": false
+        "start": "June 2011",
+        "finish": "May 2015"
       }
     ]
   }

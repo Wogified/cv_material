@@ -1,132 +1,127 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 // Resource imports
 import { jobs } from "../../resources/resume.json";
 
-const renderSections = jobs => {
-  const classes = myStyles();
-  return jobs.map(job => {
-    return (
-      <div className={classes.boot}>
-        <Grid container spacing={0}>
-          <Grid item xs={9} className={classes.place}>
-            {job.institution}
-          </Grid>
-          <Grid item xs={3} className={classes.date}>
-            {job.location}
-          </Grid>
-          <Grid item xs={6} className={classes.deg}>
-            {job.role}
-          </Grid>
-          <Grid item xs={6} className={classes.gpa}>
-            {job.start_date} to{" "}
-            {job.end_date == null ? "Present" : job.end_date}
-          </Grid>
-          <Grid item xs={12}>
-            <List component="nav" aria-label="main mailbox folders">
-              {renderDuties(job.responsibilities)}
-            </List>
-          </Grid>
-        </Grid>
-      </div>
-    );
-  });
-};
-
-const renderDuties = duties => {
-  const classes = myStyles();
-  const useDivider = index => {
-    if (index > 0) {
-      return <Divider />;
-    }
-  };
-  return duties.map((duty, index) => {
-    return (
-      <div>
-        {useDivider(index)}
-        <ListItem>
-          <ListItemText primary={duty} />
-        </ListItem>
-      </div>
-    );
-  });
-};
-
-const Experience = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{jobs.header}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <Typography>{renderSections(jobs.positions)}</Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
-};
-
-export default Experience;
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     width: "100%",
-    backgroundColor: "grey[700]"
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: "0px",
+    paddingTop: "0px",
+    color: theme.palette.text.primary
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    justify: "space-between"
-  },
-  summary: {
-    overflow: "hidden",
-    "&:hover": {
-      backgroundColor: theme.palette.primary.light
-    }
-  }
-}));
-
-const myStyles = makeStyles(theme => ({
-  boot: {
+  desc: {
     flexGrow: 1,
-    padding: theme.spacing(1)
+    paddingRight: theme.spacing(3)
   },
   place: {
     textAlign: "left",
     fontWeight: "bold",
     textDecoration: "underline"
   },
-  date: {
+  loc: {
     textAlign: "right"
   },
-  deg: {
+  role: {
     textAlign: "left"
   },
-  gpa: {
+  dates: {
     textAlign: "right"
-  },
-  bullet: {
-    listStylePosition: "outside"
   }
-}));
+});
+
+class Experience extends React.Component {
+  state = {
+    expand: false,
+    jobs: jobs
+  };
+
+  handleClick = () => {
+    this.setState({ expand: !this.state.expand });
+  };
+  handleClick2 = e => {
+    this.setState({ [e]: !this.state[e] });
+  };
+  renderDuties = duties => {
+    const useDivider = index => {
+      if (index > 0) {
+        return <Divider />;
+      }
+    };
+    return duties.map((duty, index) => {
+      return (
+        <div>
+          {useDivider(index)}
+          <ListItem>
+            <ListItemIcon fontSize="small">
+              <FiberManualRecordIcon />
+            </ListItemIcon>
+            <ListItemText primary={duty} />
+          </ListItem>
+        </div>
+      );
+    });
+  };
+  renderSections() {
+    const { classes } = this.props;
+    return this.state.jobs.positions.map((item, index) => {
+      return (
+        <List>
+          <ListItem button onClick={this.handleClick2.bind(this, index)}>
+            <Grid container spacing={1} className={classes.desc}>
+              <Grid item xs={9} className={classes.place}>
+                <Typography>{item.institution}</Typography>
+              </Grid>
+              <Grid item xs={3} className={classes.loc}>
+                <Typography>{item.location}</Typography>
+              </Grid>
+              <Grid item xs={6} className={classes.role}>
+                <Typography>{item.role}</Typography>
+              </Grid>
+              <Grid item xs={6} className={classes.dates}>
+                <Typography>
+                  {item.start_date} to{" "}
+                  {item.end_date == null ? "Present" : item.end_date}
+                </Typography>
+              </Grid>
+            </Grid>
+            {this.state[index] ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={this.state[index]} timeout="auto" unmountOnExit>
+            {this.renderDuties(item.responsibilities)}
+          </Collapse>
+        </List>
+      );
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <List className={classes.root}>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemText primary={this.state.jobs.header} />
+          {this.state.expand ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
+          {this.renderSections()}
+        </Collapse>
+      </List>
+    );
+  }
+}
+
+export default withStyles(styles, { withTheme: true })(Experience);

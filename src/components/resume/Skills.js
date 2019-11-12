@@ -1,99 +1,49 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+
 import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 // Resource imports
 import { skills } from "../../resources/resume.json";
 
-const renderSections = items => {
-  const classes = myStyles();
-  const useDivider = index => {
-    if (index > 0) {
-      return <Divider />;
-    }
-  };
-  return items.map((item, index) => {
-    return (
-      <div className={classes.root}>
-        {useDivider(index)}
-        <Paper className={classes.skillGroup}>
-          <Typography className={classes.header} variant="h5" color="primary">
-            {item.desc}
-          </Typography>
-          <Grid container spacing={0} className={classes.boot}>
-            {renderDuties(item.list)}
-          </Grid>
-        </Paper>
-      </div>
-    );
-  });
-};
-
-const renderDuties = skills => {
-  const classes = myStyles();
-  return skills.map(skill => {
-    return (
-      <Grid item xs={3}>
-        <Paper className={classes.paper}>
-          <Typography>{skill}</Typography>
-        </Paper>
-      </Grid>
-    );
-  });
-};
-
-const Skills = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{skills.header}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <Typography>{renderSections(skills.detail)}</Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
-};
-
-export default Skills;
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
-    flexGrow: 1
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: "0px",
+    paddingTop: "0px",
+    color: theme.palette.text.primary
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+  desc: {
+    flexGrow: 1,
+    paddingRight: theme.spacing(3)
   },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    justify: "space-between"
+  place: {
+    textAlign: "left",
+    fontWeight: "bold",
+    textDecoration: "underline"
   },
-  summary: {
-    overflow: "hidden",
-    "&:hover": {
-      backgroundColor: theme.palette.primary.light
-    }
-  }
-}));
-
-const myStyles = makeStyles(theme => ({
-  root: {
+  loc: {
+    textAlign: "right"
+  },
+  role: {
+    textAlign: "left"
+  },
+  dates: {
+    textAlign: "right"
+  },
+  boot: {
     flexGrow: 1,
     padding: theme.spacing(1)
   },
@@ -113,4 +63,109 @@ const myStyles = makeStyles(theme => ({
   skillGroup: {
     backgroundColor: theme.palette.grey[700]
   }
-}));
+});
+
+// const renderSections = items => {
+//   const classes = myStyles();
+//   const useDivider = index => {
+//     if (index > 0) {
+//       return <Divider />;
+//     }
+//   };
+//   return items.map((item, index) => {
+//     return (
+//       <div className={classes.root}>
+//         {useDivider(index)}
+//         <Paper className={classes.skillGroup}>
+//           <Typography className={classes.header} variant="h5" color="primary">
+//             {item.desc}
+//           </Typography>
+//           <Grid container spacing={0} className={classes.boot}>
+//             {renderDuties(item.list)}
+//           </Grid>
+//         </Paper>
+//       </div>
+//     );
+//   });
+// };
+
+// const renderDuties = skills => {
+//   const classes = myStyles();
+//   return skills.map(skill => {
+//     return (
+//       <Grid item xs={3}>
+//         <Paper className={classes.paper}>
+//           <Typography>{skill}</Typography>
+//         </Paper>
+//       </Grid>
+//     );
+//   });
+// };
+
+class Skills extends React.Component {
+  state = {
+    expand: false,
+    skills: skills
+  };
+
+  handleClick = () => {
+    this.setState({ expand: !this.state.expand });
+  };
+  handleClick2 = e => {
+    this.setState({ [e]: !this.state[e] });
+  };
+  renderDuties = duties => {
+    const { classes } = this.props;
+
+    const useDivider = index => {
+      if (index > 0) {
+        return <Divider />;
+      }
+    };
+    return duties.map((duty, index) => {
+      return (
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>
+            <Typography>{duty}</Typography>
+          </Paper>
+        </Grid>
+      );
+    });
+  };
+  renderSections() {
+    const { classes } = this.props;
+    return this.state.skills.detail.map((item, index) => {
+      return (
+        <List>
+          <ListItem button onClick={this.handleClick2.bind(this, index)}>
+            <ListItemText inset primary={item.desc} />
+
+            {this.state[index] ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={this.state[index]} timeout="auto" unmountOnExit>
+            <Grid container spacing={0} className={classes.boot}>
+              {this.renderDuties(item.list)}
+            </Grid>
+          </Collapse>
+        </List>
+      );
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <List className={classes.root}>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemText primary={this.state.skills.header} />
+          {this.state.expand ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
+          {this.renderSections()}
+        </Collapse>
+      </List>
+    );
+  }
+}
+
+export default withStyles(styles, { withTheme: true })(Skills);

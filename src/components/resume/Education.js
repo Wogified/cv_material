@@ -1,9 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
-
+import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -12,7 +10,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import AccountBalanceRoundedIcon from "@material-ui/icons/AccountBalanceRounded";
 // Resource imports
 import { school } from "../../resources/resume.json";
 
@@ -24,52 +21,61 @@ const styles = theme => ({
     paddingTop: "0px",
     color: theme.palette.text.primary
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+  desc: {
+    flexGrow: 1,
+    paddingRight: theme.spacing(6)
   },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    justify: "space-between"
+  place: {
+    textAlign: "left",
+    fontWeight: "bold",
+    textDecoration: "underline"
+  },
+  dates: {
+    textAlign: "right"
+  },
+  deg: {
+    textAlign: "left"
+  },
+  gpa: {
+    textAlign: "right"
   }
 });
 
 class Education extends React.Component {
-  componentDidMount() {
-    console.log(this.state.expand);
-  }
   state = {
     expand: false,
     school: school
   };
-  // classes = useStyles();
 
   handleClick = () => {
-    console.log(this.state.expand);
     this.setState({ expand: !this.state.expand });
-  };
-  handleClick2 = e => {
-    console.log(this.state);
-    this.setState({ [e]: !this.state[e] });
   };
 
   renderSections() {
     const { classes } = this.props;
     return this.state.school.degrees.map((item, index) => {
       return (
-        <div>
-          <ListItem button onClick={this.handleClick2.bind(this, index)}>
-            <ListItemIcon>
-              <AccountBalanceRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary={item.place} />
-            {this.state[index] ? <ExpandLess /> : <ExpandMore />}
+        <List>
+          <ListItem>
+            <Grid container spacing={1} className={classes.desc}>
+              <Grid item xs={6} className={classes.place}>
+                <Typography>{item.place}</Typography>
+              </Grid>
+              <Grid item xs={6} className={classes.dates}>
+                <Typography>
+                  {item.start} to {item.finish}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={6} className={classes.deg}>
+                <Typography>{item.degree}</Typography>
+              </Grid>
+              <Grid item xs={6} className={classes.gpa}>
+                <Typography>GPA: {item.gpa}</Typography>
+              </Grid>
+            </Grid>
           </ListItem>
-          <Collapse in={this.state[index]} timeout="auto" unmountOnExit>
-            poop
-          </Collapse>
-        </div>
+        </List>
       );
     });
   }

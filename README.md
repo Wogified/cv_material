@@ -1,3 +1,7 @@
+## How to Use
+
+1. Go here: [https://wogified.github.io/seasons_hooks/](https://wogified.github.io/seasons_hooks/). Accept Location request
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
